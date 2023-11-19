@@ -59,8 +59,8 @@ void RegenerateCommitments(CBlock& block, ChainstateManager& chainman)
 
 static BlockAssembler::Options ClampOptions(BlockAssembler::Options options)
 {
-    // Limit weight to between 4K and DEFAULT_BLOCK_MAX_WEIGHT for sanity:
-    options.nBlockMaxWeight = std::clamp<size_t>(options.nBlockMaxWeight, 4000, DEFAULT_BLOCK_MAX_WEIGHT);
+    // Limit weight to between 16K and DEFAULT_BLOCK_MAX_WEIGHT for sanity:
+    options.nBlockMaxWeight = std::clamp<size_t>(options.nBlockMaxWeight, 16000, DEFAULT_BLOCK_MAX_WEIGHT);
     return options;
 }
 
@@ -95,7 +95,7 @@ void BlockAssembler::resetBlock()
     inBlock.clear();
 
     // Reserve space for coinbase tx
-    nBlockWeight = 4000;
+    nBlockWeight = 16000;
     nBlockSigOpsCost = 400;
 
     // These counters do not include coinbase tx
